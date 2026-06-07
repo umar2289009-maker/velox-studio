@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аканэ — Суши, Роллы, Пицца | Жалал-Абад</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080A;
+  --surface:#101014;
+  --surface2:#18181E;
+  --red:#D42B2B;
+  --red2:#FF4444;
+  --gold:#C8A84B;
+  --cream:#F5F0E8;
+  --ink2:#70707A;
+  --border:rgba(255,255,255,0.07);
+  --white:#FAFAFA;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(8,8,10,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-icon{
+  width:40px;height:40px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:900;color:var(--white);
+  font-family:'Noto Serif JP',serif;
+}
+.logo-text{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:700;letter-spacing:2px;color:var(--white);}
+.logo-text span{color:var(--red);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--ink2);font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-btn{
+  background:var(--red);color:var(--white);
+  padding:10px 24px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;
+  border:none;cursor:pointer;transition:background .2s,transform .2s;
+  border-radius:4px;
+}
+.nav-btn:hover{background:var(--red2);transform:translateY(-1px);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,rgba(8,8,10,0.2) 0%,rgba(8,8,10,0.6) 50%,rgba(8,8,10,0.97) 100%),
+    radial-gradient(ellipse 80% 80% at 60% 30%,rgba(212,43,43,0.12) 0%,transparent 60%),
+    linear-gradient(135deg,#0A0A0E,#141018,#0E080A);
+}
+.hero-jp{
+  position:absolute;top:80px;right:60px;
+  font-family:'Noto Serif JP',serif;
+  font-size:180px;font-weight:700;
+  color:rgba(255,255,255,0.02);
+  line-height:1;letter-spacing:-10px;
+  pointer-events:none;
+}
+.hero-circles{
+  position:absolute;top:50%;right:10%;transform:translateY(-50%);
+  width:500px;height:500px;pointer-events:none;
+}
+.hero-circles::before{
+  content:'';position:absolute;inset:0;
+  border:1px solid rgba(212,43,43,0.08);border-radius:50%;
+}
+.hero-circles::after{
+  content:'';position:absolute;inset:60px;
+  border:1px solid rgba(212,43,43,0.05);border-radius:50%;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--red);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:24px;position:relative;
+  opacity:0;animation:fadeUp .6s .1s forwards;
+}
+.hero-tag::before{content:'';width:24px;height:2px;background:var(--red);}
+h1{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(48px,7vw,96px);
+  line-height:0.95;font-weight:700;
+  letter-spacing:-2px;
+  max-width:700px;
+  opacity:0;animation:fadeUp .9s .25s forwards;
+  position:relative;
+}
+h1 .outline{-webkit-text-stroke:1px rgba(255,255,255,0.2);color:transparent;}
+h1 em{font-style:normal;color:var(--red);}
+.hero-sub{
+  font-size:16px;color:var(--ink2);max-width:500px;
+  margin-top:24px;line-height:1.7;font-weight:300;
+  opacity:0;animation:fadeUp .7s .4s forwards;position:relative;
+}
+.hero-actions{
+  display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s .55s forwards;position:relative;
+}
+.btn-red{
+  background:var(--red);color:var(--white);
+  padding:16px 36px;border-radius:4px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 4px 24px rgba(212,43,43,0.35);
+}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,43,43,0.45);}
+.btn-out{
+  background:transparent;color:var(--cream);
+  padding:16px 28px;border-radius:4px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  border:1px solid var(--border);cursor:pointer;
+  transition:border-color .2s,transform .2s;
+}
+.btn-out:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-1px);}
+.hero-stats{
+  display:flex;gap:48px;margin-top:56px;padding-top:36px;
+  border-top:1px solid var(--border);
+  opacity:0;animation:fadeUp .7s .7s forwards;position:relative;
+}
+.h-stat-num{
+  font-family:'Noto Serif JP',serif;
+  font-size:36px;color:var(--white);line-height:1;
+}
+.h-stat-num span{color:var(--red);}
+.h-stat-label{font-size:11px;color:var(--ink2);margin-top:6px;letter-spacing:1px;}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;background:var(--red);padding:12px 0;}
+.ticker{display:flex;gap:0;animation:ticker 15s linear infinite;white-space:nowrap;}
+.tick-item{
+  padding:0 32px;font-size:12px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.8);flex-shrink:0;
+  display:flex;align-items:center;gap:20px;
+}
+.tick-item span{color:rgba(255,255,255,0.4);font-size:18px;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* MENU */
+.menu{padding:100px 48px;}
+.s-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.s-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  line-height:1.05;letter-spacing:-1px;
+}
+.menu-tabs{
+  display:flex;gap:0;margin-top:48px;margin-bottom:32px;
+  border-bottom:1px solid var(--border);
+}
+.tab{
+  padding:14px 28px;font-size:13px;font-weight:600;
+  color:var(--ink2);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;
+}
+.tab.active{color:var(--red);border-bottom-color:var(--red);}
+.tab:hover{color:var(--cream);}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.menu-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.menu-card:hover{transform:translateY(-4px);border-color:rgba(212,43,43,0.3);}
+.menu-img{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  font-size:60px;position:relative;
+}
+.menu-badge{
+  position:absolute;top:12px;left:12px;
+  background:var(--red);color:var(--white);
+  font-size:10px;font-weight:800;letter-spacing:1px;
+  padding:4px 10px;border-radius:4px;
+}
+.menu-body{padding:18px;}
+.menu-name{font-size:16px;font-weight:700;margin-bottom:6px;}
+.menu-desc{font-size:12px;color:var(--ink2);line-height:1.5;margin-bottom:14px;}
+.menu-footer{display:flex;justify-content:space-between;align-items:center;}
+.menu-price{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:700;color:var(--red);}
+.menu-btn{
+  background:rgba(212,43,43,0.1);color:var(--red);
+  padding:7px 16px;border-radius:4px;
+  font-size:12px;font-weight:700;border:1px solid rgba(212,43,43,0.2);
+  cursor:pointer;transition:all .2s;
+}
+.menu-btn:hover{background:var(--red);color:var(--white);}
+
+/* COMBOS */
+.combos{padding:80px 48px;background:var(--surface);}
+.combo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.combo-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:28px;
+  position:relative;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.combo-card:hover{transform:translateY(-4px);border-color:rgba(212,43,43,0.3);}
+.combo-card.hot{border-color:rgba(212,43,43,0.4);background:rgba(212,43,43,0.04);}
+.combo-hot-badge{
+  position:absolute;top:16px;right:16px;
+  background:var(--red);color:var(--white);
+  font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;
+}
+.combo-emoji{font-size:36px;margin-bottom:16px;}
+.combo-name{font-size:18px;font-weight:800;margin-bottom:8px;}
+.combo-items{font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:20px;}
+.combo-price{
+  font-family:'Noto Serif JP',serif;
+  font-size:28px;font-weight:700;color:var(--red);
+}
+.combo-old{font-size:13px;color:var(--ink2);text-decoration:line-through;margin-left:8px;}
+
+/* DELIVERY */
+.delivery{
+  padding:80px 48px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;
+}
+.del-visual{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:40px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.del-row{
+  display:flex;align-items:center;gap:16px;
+  padding:16px;background:var(--bg);border-radius:8px;
+  border:1px solid var(--border);
+  transition:border-color .3s;
+}
+.del-row:hover{border-color:rgba(212,43,43,0.3);}
+.del-icon{font-size:24px;width:48px;text-align:center;flex-shrink:0;}
+.del-text h4{font-size:14px;font-weight:700;margin-bottom:3px;}
+.del-text p{font-size:12px;color:var(--ink2);}
+.del-right .s-title{margin-top:12px;margin-bottom:20px;}
+.del-right p{font-size:15px;color:var(--ink2);line-height:1.8;font-weight:300;}
+.del-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#25D366;color:var(--white);
+  padding:14px 28px;border-radius:4px;margin-top:28px;
+  font-size:14px;font-weight:700;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(37,211,102,0.3);
+}
+.del-wa:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,0.4);}
+
+/* REVIEWS */
+.reviews{padding:80px 48px;background:var(--surface);}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.rev-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:28px;
+  transition:transform .3s,border-color .3s;
+}
+.rev-card:hover{transform:translateY(-4px);border-color:rgba(212,43,43,0.2);}
+.rev-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px;}
+.rev-text{font-size:13px;color:var(--cream);line-height:1.7;margin-bottom:20px;}
+.rev-author{display:flex;align-items:center;gap:12px;}
+.rev-ava{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.rev-name{font-size:13px;font-weight:700;}
+.rev-role{font-size:11px;color:var(--ink2);margin-top:2px;}
+
+/* FORM */
+.form-section{
+  padding:100px 48px;
+  background:var(--bg);
+  position:relative;overflow:hidden;
+}
+.form-section::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(212,43,43,0.08),transparent 65%);
+}
+.form-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.form-left .s-title{margin-top:12px;margin-bottom:20px;}
+.form-left p{font-size:15px;color:var(--ink2);line-height:1.8;font-weight:300;}
+.contact-row{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+.c-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border:1px solid var(--border);border-radius:8px;
+  transition:border-color .3s;
+}
+.c-item:hover{border-color:rgba(212,43,43,0.3);}
+.c-ico{font-size:20px;width:36px;text-align:center;}
+.c-info-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink2);}
+.c-info-val{font-size:14px;color:var(--cream);margin-top:2px;}
+.c-info-val a{color:var(--red);text-decoration:none;}
+
+.form-right{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:40px;
+}
+.f-title{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:700;margin-bottom:6px;}
+.f-sub{font-size:12px;color:var(--ink2);margin-bottom:28px;letter-spacing:0.5px;}
+.f-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.f-field label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ink2);}
+.f-field input,.f-field select{
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--cream);padding:13px 16px;
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  outline:none;border-radius:6px;transition:border-color .2s;-webkit-appearance:none;
+}
+.f-field input::placeholder{color:var(--ink2);}
+.f-field input:focus,.f-field select:focus{border-color:rgba(212,43,43,0.4);}
+.f-field select option{background:var(--surface2);}
+.f-submit{
+  width:100%;padding:15px;border-radius:6px;margin-top:8px;
+  background:var(--red);color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;
+  border:none;cursor:pointer;letter-spacing:1px;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(212,43,43,0.3);
+}
+.f-submit:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,43,43,0.4);}
+.f-note{font-size:11px;color:var(--ink2);text-align:center;margin-top:10px;}
+
+/* FOOTER */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:40px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.f-logo{display:flex;align-items:center;gap:10px;}
+.f-logo-icon{width:36px;height:36px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--white);font-family:'Noto Serif JP',serif;}
+.f-logo-text{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:700;color:var(--white);}
+.f-logo-text span{color:var(--red);}
+.f-copy{font-size:12px;color:var(--ink2);}
+.f-links{display:flex;gap:20px;}
+.f-links a{font-size:12px;color:var(--ink2);text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:var(--red);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hero,.menu,.combos,.delivery,.reviews,.form-section{padding-left:20px;padding-right:20px;}
+  .menu-grid,.combo-grid,.rev-grid{grid-template-columns:1fr;}
+  .delivery,.form-inner{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;flex-wrap:wrap;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">茜</div>
+    <div class="logo-text">АКА<span>НЭ</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Меню</a></li>
+    <li><a href="#combos">Комбо</a></li>
+    <li><a href="#delivery">Доставка</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+  <button class="nav-btn" onclick="window.open('https://wa.me/996705882822','_blank')">Заказать сейчас</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-jp">茜</div>
+  <div class="hero-circles"></div>
+  <div class="hero-tag">Суши · Роллы · Пицца · Вок · Жалал-Абад</div>
+  <h1>Вкус <em>Японии</em><br>у вас <span class="outline">дома</span></h1>
+  <p class="hero-sub">Свежие роллы, хрустящая пицца и ароматный вок. Бесплатная доставка от 800 сом до 3 км. Работаем с 11:00 до 23:00.</p>
+  <div class="hero-actions">
+    <button class="btn-red" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Смотреть меню</button>
+    <button class="btn-out" onclick="window.open('https://wa.me/996705882822','_blank')">Заказать в WhatsApp</button>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="h-stat-num">3 793<span>+</span></div>
+      <div class="h-stat-label">Подписчиков</div>
+    </div>
+    <div>
+      <div class="h-stat-num">800<span>с</span></div>
+      <div class="h-stat-label">Бесплатная доставка от</div>
+    </div>
+    <div>
+      <div class="h-stat-num">12<span>ч</span></div>
+      <div class="h-stat-label">Работаем каждый день</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="tick-item">Роллы<span>✦</span></div>
+    <div class="tick-item">Пицца<span>✦</span></div>
+    <div class="tick-item">Суши<span>✦</span></div>
+    <div class="tick-item">Вок<span>✦</span></div>
+    <div class="tick-item">Доставка от 800 сом<span>✦</span></div>
+    <div class="tick-item">До 3 км бесплатно<span>✦</span></div>
+    <div class="tick-item">11:00 — 23:00<span>✦</span></div>
+    <div class="tick-item">Роллы<span>✦</span></div>
+    <div class="tick-item">Пицца<span>✦</span></div>
+    <div class="tick-item">Суши<span>✦</span></div>
+    <div class="tick-item">Вок<span>✦</span></div>
+    <div class="tick-item">Доставка от 800 сом<span>✦</span></div>
+    <div class="tick-item">До 3 км бесплатно<span>✦</span></div>
+    <div class="tick-item">11:00 — 23:00<span>✦</span></div>
+  </div>
+</div>
+
+<section class="menu" id="menu">
+  <div class="reveal"><div class="s-tag">Наше меню</div></div>
+  <div class="s-title reveal d1">Выбирайте<br>любимое</div>
+  <div class="menu-tabs">
+    <div class="tab active">🍣 Роллы</div>
+    <div class="tab">🍕 Пицца</div>
+    <div class="tab">🥢 Вок</div>
+    <div class="tab">🍱 Сеты</div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="menu-img" style="padding:0;"><img src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=400&q=80" style="width:100%;height:180px;object-fit:cover;display:block"/><div class="menu-badge">ХИТ</div></div>
+      <div class="menu-body">
+        <div class="menu-name">Калифорния с крабом</div>
+        <div class="menu-desc">Краб, авокадо, огурец, икра тобико. Классика которую любят все.</div>
+        <div class="menu-footer">
+          <div class="menu-price">от 590 с</div>
+          <button class="menu-btn" onclick="window.open('https://wa.me/996705882822','_blank')">Заказать</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal d1">
+      <div class="menu-img" style="padding:0;"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=400&q=80" style="width:100%;height:180px;object-fit:cover;display:block"/><div class="menu-badge" style="background:#FF6B00">ОСТРЫЙ</div></div>
+      <div class="menu-body">
+        <div class="menu-name">Темпура Лава</div>
+        <div class="menu-desc">Хрустящая темпура, острый соус, сливочный сыр — взрыв вкуса!</div>
+        <div class="menu-footer">
+          <div class="menu-price">от 650 с</div>
+          <button class="menu-btn" onclick="window.open('https://wa.me/996705882822','_blank')">Заказать</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal d2">
+      <div class="menu-img" style="padding:0;"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" style="width:100%;height:180px;object-fit:cover;display:block"/></div>
+      <div class="menu-body">
+        <div class="menu-name">Пицца Пепперони</div>
+        <div class="menu-desc">Сочная пепперони, моцарелла, томатный соус. Пицца 30 см.</div>
+        <div class="menu-footer">
+          <div class="menu-price">от 690 с</div>
+          <button class="menu-btn" onclick="window.open('https://wa.me/996705882822','_blank')">Заказать</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="combos" id="combos">
+  <div class="reveal"><div class="s-tag">Акции</div></div>
+  <div class="s-title reveal d1">Выгодные<br>комбо-сеты</div>
+  <div class="combo-grid">
+    <div class="combo-card reveal">
+      <div class="combo-emoji">🎉</div>
+      <div class="combo-name">Бека Комбо</div>
+      <div class="combo-items">
+        Тори яки · Хрустящая курочка<br>
+        Темпура-Лава · Хот-ролл<br>
+        Пицца Пепперони 30см<br>
+        Напиток на выбор
+      </div>
+      <div class="combo-price">990 <span style="font-size:16px">сом</span></div>
+    </div>
+    <div class="combo-card hot reveal d1">
+      <div class="combo-hot-badge">🔥 ЗИМНИЙ</div>
+      <div class="combo-emoji">❄️</div>
+      <div class="combo-name">Зимний Комбо</div>
+      <div class="combo-items">
+        Онигири Темпура с курицей<br>
+        Хрустящая курочка<br>
+        Тори яки · Нагетсы 7шт<br>
+        Суши-дог · Пицца Пепперони<br>
+        Coca-Cola 1л
+      </div>
+      <div class="combo-price">1140 <span style="font-size:16px">сом</span></div>
+    </div>
+    <div class="combo-card reveal d2">
+      <div class="combo-emoji">👥</div>
+      <div class="combo-name">Корпоратив</div>
+      <div class="combo-items">
+        72 шт роллов<br>
+        3 Пиццы 30см<br>
+        Идеально для компании<br>
+        и корпоративных вечеров
+      </div>
+      <div class="combo-price">2740 <span style="font-size:16px">сом</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="delivery" id="delivery">
+  <div class="del-visual reveal">
+    <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink2);margin-bottom:8px;">Условия доставки</div>
+    <div class="del-row">
+      <div class="del-icon">🚀</div>
+      <div class="del-text">
+        <h4>Бесплатная доставка</h4>
+        <p>От 800 сом · До 3 км от нас</p>
+      </div>
+    </div>
+    <div class="del-row">
+      <div class="del-icon">⏱️</div>
+      <div class="del-text">
+        <h4>Быстро и горячо</h4>
+        <p>Доставляем пока всё свежее</p>
+      </div>
+    </div>
+    <div class="del-row">
+      <div class="del-icon">📍</div>
+      <div class="del-text">
+        <h4>Адрес</h4>
+        <p>Мкр. Достук, ул. Ибраимова 88</p>
+      </div>
+    </div>
+    <div class="del-row">
+      <div class="del-icon">🕐</div>
+      <div class="del-text">
+        <h4>Время работы</h4>
+        <p>Ежедневно 11:00 — 23:00</p>
+      </div>
+    </div>
+  </div>
+  <div class="del-right reveal d2">
+    <div class="s-tag">Доставка</div>
+    <div class="s-title">Привезём<br>прямо к вам</div>
+    <p>Заказывайте через WhatsApp — принимаем заказы быстро. Оплата наличными или переводом на карту.</p>
+    <a href="https://wa.me/996705882822" class="del-wa" target="_blank">💬 Заказать в WhatsApp</a>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="reveal"><div class="s-tag">Отзывы</div></div>
+  <div class="s-title reveal d1">Нас любят<br>клиенты</div>
+  <div class="rev-grid">
+    <div class="rev-card reveal">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Заказываем каждую пятницу! Роллы всегда свежие, доставка быстрая. Бека Комбо — наш фаворит. Рекомендую всем!</p>
+      <div class="rev-author">
+        <div class="rev-ava">😊</div>
+        <div>
+          <div class="rev-name">Айзада К.</div>
+          <div class="rev-role">Постоянный клиент</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-card reveal d1">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Темпура Лава — просто бомба! Заказал впервые и уже не могу остановиться. Пицца тоже отличная, тесто тонкое как надо.</p>
+      <div class="rev-author">
+        <div class="rev-ava">🤤</div>
+        <div>
+          <div class="rev-name">Бакыт М.</div>
+          <div class="rev-role">Жалал-Абад</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-card reveal d2">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Брали корпоратив на 10 человек — всё было вкусно и вовремя. Цены адекватные, порции большие. Будем заказывать ещё!</p>
+      <div class="rev-author">
+        <div class="rev-ava">👏</div>
+        <div>
+          <div class="rev-name">Нурлан А.</div>
+          <div class="rev-role">Корпоративный клиент</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="contact">
+  <div class="form-inner">
+    <div class="form-left reveal">
+      <div class="s-tag">Контакты</div>
+      <div class="s-title">Закажите<br>прямо сейчас</div>
+      <p>Пишите в WhatsApp — ответим быстро и примем ваш заказ. Работаем каждый день с 11:00 до 23:00.</p>
+      <div class="contact-row">
+        <div class="c-item">
+          <div class="c-ico">💬</div>
+          <div>
+            <div class="c-info-label">WhatsApp</div>
+            <div class="c-info-val"><a href="https://wa.me/996705882822">0705 882 822</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">📍</div>
+          <div>
+            <div class="c-info-label">Адрес</div>
+            <div class="c-info-val">Мкр. Достук, ул. Ибраимова 88</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">🕐</div>
+          <div>
+            <div class="c-info-label">Время работы</div>
+            <div class="c-info-val">11:00 — 23:00 · Без выходных</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-right reveal d2">
+      <div class="f-title">Оставить заказ</div>
+      <div class="f-sub">Перезвоним и уточним детали</div>
+      <div class="f-field">
+        <label>Ваше имя</label>
+        <input type="text" placeholder="Азамат">
+      </div>
+      <div class="f-field">
+        <label>Телефон</label>
+        <input type="tel" placeholder="0700 000 000">
+      </div>
+      <div class="f-field">
+        <label>Что хотите заказать?</label>
+        <select>
+          <option>Роллы и суши</option>
+          <option>Пицца</option>
+          <option>Вок</option>
+          <option>Комбо-сет</option>
+          <option>Корпоративный заказ</option>
+        </select>
+      </div>
+      <button class="f-submit" onclick="window.open('https://wa.me/996705882822?text='+encodeURIComponent('Здравствуйте! Хочу сделать заказ в Аканэ.'), '_blank')">Заказать через WhatsApp →</button>
+      <p class="f-note">Работаем 11:00–23:00 · Доставка от 800 сом</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">
+    <div class="f-logo-icon">茜</div>
+    <div class="f-logo-text">АКА<span>НЭ</span></div>
+  </div>
+  <div class="f-copy">© 2025 Аканэ · Суши, Роллы, Пицца · Жалал-Абад</div>
+  <div class="f-links">
+    <a href="#menu">Меню</a>
+    <a href="#combos">Комбо</a>
+    <a href="#contact">Заказать</a>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
